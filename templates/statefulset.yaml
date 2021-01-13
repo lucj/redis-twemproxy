@@ -66,3 +66,12 @@ spec:
         ports:
         - name: {{ template "fullname" . }}
           containerPort: 6379
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: {{ .Values.storage.class }} 
+        resources:
+          requests:
+            storage: {{ .Values.storage.capacity }}
