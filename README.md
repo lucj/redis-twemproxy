@@ -19,7 +19,7 @@ In this example, we use Longhorn block storage. This storage solution from Ranch
 $ kubectl apply -f https://raw.githubusercontent.com/longhorn/longhorn/v1.1.0/deploy/longhorn.yaml
 ```
 
-All the Longhorn components are created in the *longhorn-system* namespace. Among them the *longhorn* StorageClass* that we could use to have a persistentVolume automatically created for each *redis* Pod.
+All the Longhorn components are created in the *longhorn-system* namespace. Among them the *longhorn* StorageClass that we could use to have a persistentVolume automatically created for each *redis* Pod.
 
 Note: Longhorn is the solution selected, but any other block storage solution could be used instead (eg: Rook/Ceph, OpenEBS, ...)
 
@@ -44,6 +44,12 @@ The following table lists some of the configurable parameters and their default 
 If you need to change some of those parameters when installing the chart, you can:
 - modify the values.yaml file or provide your own values file
 - specify each parameter using the `--set key=value[,key=value]` argument to `helm install`
+
+:fire: A node selector is used so the Pod deployed from that chart are shceduled on node with a given label (default to *tier: redis*)
+The following command add this default label on all the nodes but we are free to select only the one we need:
+````
+$ kubectl label node --all tier=redis
+````
 
 ## Uninstall
 
