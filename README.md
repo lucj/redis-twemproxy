@@ -117,19 +117,15 @@ persistentvolume/pvc-76e2bfd2-ec2a-437e-a2ae-3e01f396cd40   10Gi       RWO      
 persistentvolume/pvc-d0461687-bda5-4a94-8f5d-4aa8488056e8   10Gi       RWO            Delete           Bound    default/data-redis-worker-1   longhorn                6m2s
 ````
 
-The following command lists the service within the *longhorn-system* namespace:
+Using a port-forward on the *longhorn-frontend* service, we can access Longhorn's web UI:
+
 ````
-$ kubectl get svc -n longhorn-system
-NAME                TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)     AGE
-csi-attacher        ClusterIP   10.245.149.245   <none>        12345/TCP   73m
-csi-provisioner     ClusterIP   10.245.89.82     <none>        12345/TCP   73m
-csi-resizer         ClusterIP   10.245.111.225   <none>        12345/TCP   73m
-csi-snapshotter     ClusterIP   10.245.151.248   <none>        12345/TCP   73m
-longhorn-backend    ClusterIP   10.245.166.3     <none>        9500/TCP    74m
-longhorn-frontend   ClusterIP   10.245.177.34    <none>        80/TCP      74m
+$ kubectl port-forward -n longhorn-system svc longhorn-frontend  8888:80
 ````
 
-Using a port-forward on the Getting the ClusterIP service exposing the Longhorn frontend
+![Longhorn dashboard](./images/longhorn-dashboard.png)
+
+A volume has been created for each redis Pod.
 
 
 
