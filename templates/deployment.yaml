@@ -1,6 +1,6 @@
 ---
 {{- if .Values.twemproxy.enabled }}
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ template "twemproxy" . }}
@@ -13,6 +13,9 @@ metadata:
     {{- toYaml .Values.twemproxy.annotations | nindent 4 }}
 spec:
   replicas: {{ .Values.twemproxy.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ template "twemproxy" . }}
   template:
     metadata:
       labels:

@@ -1,4 +1,4 @@
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: {{ template "fullname" . }}
@@ -13,6 +13,9 @@ spec:
   podManagementPolicy: Parallel
   serviceName: {{ template "fullname" . }}
   replicas: {{ .Values.redis.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ template "fullname" . }}
   template:
     metadata:
       labels:

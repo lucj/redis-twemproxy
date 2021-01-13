@@ -36,7 +36,7 @@ twemproxy:
       memory: 13000Mi
 
 redis:
-  image: redis:5.0-rc
+  image: redis:6.0.10
   replicaCount: 6
   service:
     annotations:
@@ -53,10 +53,10 @@ redis:
   resources:
     requests:
       cpu: 1
-      memory: 6Gi
+      memory: 1Gi
     limits: 
       cpu: 1
-      memory: 6Gi
+      memory: 1Gi
   readinessProbe:
     initialDelaySeconds: 15
     periodSeconds: 15
